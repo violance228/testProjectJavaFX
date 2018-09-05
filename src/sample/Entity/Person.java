@@ -25,6 +25,10 @@ public class Person {
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
 
+    public Person() {
+        this(null, null);
+    }
+
     public String getName() {
         return name.get();
     }

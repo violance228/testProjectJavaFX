@@ -89,6 +89,34 @@ public class Controller {
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
+    }
 
+    @FXML
+    private void handleNewPerson() {
+        Person tempPersone = new Person();
+
+        boolean okClicked = main.showPersonEditDialog(tempPersone);
+        if (okClicked) {
+            main.getPersonData().add(tempPersone);
+        }
+    }
+
+    @FXML
+    private void handleEditPerson() {
+        Person selectedPersone = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPersone != null) {
+            boolean okClicked = main.showPersonEditDialog(selectedPersone);
+            if (okClicked) {
+                showPersonDetails(selectedPersone);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(main.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a persone in the table.");
+
+            alert.showAndWait();
+        }
     }
 }
